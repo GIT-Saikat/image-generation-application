@@ -1,4 +1,5 @@
 import express from "express";
+import { TrainModel, GenerateImage, GenerateImageFromPack } from "common/types";
 
 const app = express();
 const PORT = process.env.PORT || 3000;

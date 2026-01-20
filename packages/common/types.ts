@@ -21,4 +21,13 @@ export const TrainModel = z.object({
   images: z.array(z.string()),
 });
 
+export const GenerateImage = z.object({
+  prompt: z.string(),
+  modelId: z.string(),
+  num: z.number(),
+});
 
+export const GenerateImageFromPack = z.object({
+  modelId: z.string(),
+  packId: z.string(),
+});
