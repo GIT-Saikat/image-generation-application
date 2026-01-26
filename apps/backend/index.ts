@@ -1,30 +1,43 @@
-import express from "express";
+import express, { json } from "express";
 import { TrainModel, GenerateImage, GenerateImageFromPack } from "common/types";
 import { prisma } from "db";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.post("/ai/training",(req,res)=>{
+app.use(express.json());
 
-})
+app.post("/ai/training", async (req, res) => {
+  const parsedBody  = TrainModel.safeParse(req.body);
 
-app.post("/ai/generate0",(req,res)=>{
+  if(!parsedBody.success){
+    res.status(411).json({
+      message: "Input incorrect"
+    })
+    return;
+  }
 
-})
+  const data = await prisma.model.create({
+    data:{
+      name: parsedBody.data.name,
+      type: parsedBody.data.type,
+      age:parsedBody.data.age,
+      ethinicity:parsedBody.data.ethinicity,
+      eyeColour:parsedBody.data.eyeColour,
+      bald:parsedBody.data.bald
 
-app.post("/package/generate",(req,res)=>{
+    }
+  })
+});
 
-})
+app.post("/ai/generate0", (req, res) => {});
 
-app.get("/package/bulk",(req,res)=>{
+app.post("/package/generate", (req, res) => {});
 
-})
+app.get("/package/bulk", (req, res) => {});
 
-app.get("/image",(req,res)=>{
-    
-})
+app.get("/image", (req, res) => {});
 
-app.listen(PORT,()=>{
-    console.log("server is running on 3000");
-})
+app.listen(PORT, () => {
+  console.log("server is running on 3000");
+});
