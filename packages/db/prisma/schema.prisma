@@ -27,6 +27,7 @@ model Model {
   ethinicity EthinicityEnum
   eyeColour  EyeColorEnum
   bald       Boolean
+  userId     String
 
   trainingImages TrainingImages[]
   outputImages   OutputImages[]
@@ -71,11 +72,11 @@ enum ModelTypeEnum {
 enum EthinicityEnum {
   White
   Black
-  AsianAmerican
-  EastAsian
-  SouthEastAsian
-  SouthAsian
-  MiddleEastern
+  AsianAmerican  @map("Asian American")
+  EastAsian      @map("East Asian")
+  SouthEastAsian @map("South East Asian")
+  SouthAsian     @map("South Asian")
+  MiddleEastern  @map("Middle Eastern")
   Pacific
   Hispanic
 }

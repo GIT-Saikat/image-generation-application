@@ -4,6 +4,7 @@ import { prisma } from "db";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const USER_ID = "qwdeww"
 
 app.use(express.json());
 
@@ -24,9 +25,14 @@ app.post("/ai/training", async (req, res) => {
       age:parsedBody.data.age,
       ethinicity:parsedBody.data.ethinicity,
       eyeColour:parsedBody.data.eyeColour,
-      bald:parsedBody.data.bald
+      bald:parsedBody.data.bald,
+      userId: USER_ID
 
     }
+  })
+
+  res.json({
+    modelId:data.id
   })
 });
 
