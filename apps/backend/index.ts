@@ -4,39 +4,44 @@ import { prisma } from "db";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const USER_ID = "qwdeww"
+const USER_ID = "qwdeww";
 
 app.use(express.json());
 
 app.post("/ai/training", async (req, res) => {
-  const parsedBody  = TrainModel.safeParse(req.body);
+  const parsedBody = TrainModel.safeParse(req.body);
 
-  if(!parsedBody.success){
+  if (!parsedBody.success) {
     res.status(411).json({
-      message: "Input incorrect"
-    })
+      message: "Input incorrect",
+    });
     return;
   }
 
   const data = await prisma.model.create({
-    data:{
+    data: {
       name: parsedBody.data.name,
       type: parsedBody.data.type,
-      age:parsedBody.data.age,
-      ethinicity:parsedBody.data.ethinicity,
-      eyeColour:parsedBody.data.eyeColour,
-      bald:parsedBody.data.bald,
-      userId: USER_ID
-
-    }
-  })
+      age: parsedBody.data.age,
+      ethinicity: parsedBody.data.ethinicity,
+      eyeColour: parsedBody.data.eyeColour,
+      bald: parsedBody.data.bald,
+      userId: USER_ID,
+    },
+  });
 
   res.json({
-    modelId:data.id
-  })
+    modelId: data.id,
+  });
 });
 
-app.post("/ai/generate0", (req, res) => {});
+app.post("/ai/generate", async (req, res) => {
+  const parsedBody = GenerateImage.safeParse(req.body);
+  if (!parsedBody.success) {
+    res.status(411).json({});
+  }
+  const data = await prisma.outputImages.create;
+});
 
 app.post("/package/generate", (req, res) => {});
 
