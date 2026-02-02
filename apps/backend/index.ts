@@ -40,7 +40,14 @@ app.post("/ai/generate", async (req, res) => {
   if (!parsedBody.success) {
     res.status(411).json({});
   }
-  const data = await prisma.outputImages.create;
+  const data = await prisma.outputImages.create({
+    data: {
+      prompt:parsedBody.?data.?prompt
+      userId: USER_ID
+      modelId: parsedBody.data.modelId
+      image
+    }
+  })
 });
 
 app.post("/package/generate", (req, res) => {});
