@@ -39,14 +39,19 @@ app.post("/ai/generate", async (req, res) => {
   const parsedBody = GenerateImage.safeParse(req.body);
   if (!parsedBody.success) {
     res.status(411).json({});
+    return;
   }
   const data = await prisma.outputImages.create({
     data: {
-      prompt:parsedBody.?data.?prompt
-      userId: USER_ID
-      modelId: parsedBody.data.modelId
-      image
+      prompt:parsedBody.data.prompt,
+      userId: USER_ID,
+      modelId: parsedBody.data.modelId,
+      imageUrl:""
     }
+  })
+
+  res.json({
+    imageId:data.id
   })
 });
 
